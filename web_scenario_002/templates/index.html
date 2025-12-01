@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRINTMON // The Printer That Knew Too Much</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <h1 class="logo">PRINTMON <span class="divider">//</span> <span class="scenario-number">FORENSICS</span>
+                </h1>
+                <p class="subtitle">PRINTER INVESTIGATION TOOLKIT</p>
+            </div>
+            <div class="header-right">
+                <div class="status-indicator" id="status">
+                    <span class="status-dot"></span>
+                    <span class="status-text">INITIALIZING</span>
+                </div>
+                <div class="timer" id="timer">00:00</div>
+            </div>
+        </header>
+
+        <!-- Left Sidebar: Telemetry -->
+        <aside class="sidebar-left">
+            <h2 class="panel-title">DEVICE TELEMETRY</h2>
+            <div class="telemetry-grid">
+                <div class="telemetry-item">
+                    <span class="label">Model:</span>
+                    <span class="value" id="telemetry-model">-</span>
+                </div>
+                <div class="telemetry-item">
+                    <span class="label">IP:</span>
+                    <span class="value" id="telemetry-ip">-</span>
+                </div>
+                <div class="telemetry-item">
+                    <span class="label">Status:</span>
+                    <span class="value status-value" id="telemetry-status">IDLE</span>
+                </div>
+            </div>
+
+            <button class="start-btn" id="start-btn">
+                <span class="btn-icon">▶</span>
+                START ANALYSIS
+            </button>
+        </aside>
+
+        <!-- Center: Main Console -->
+        <main class="main-console">
+            <h2 class="panel-title-light">FORENSIC CONSOLE</h2>
+            <div class="console-log" id="console-log">
+                <div class="log-entry system">
+                    <span class="timestamp">[--:--:--]</span>
+                    <span class="message">Awaiting initialization...</span>
+                </div>
+            </div>
+
+            <div class="code-viewer" id="code-viewer" style="display: none;">
+                <h3 class="code-title">scheduler.py</h3>
+                <pre class="code-content" id="code-content"></pre>
+            </div>
+        </main>
+
+        <!-- Right Sidebar: Hex Dump -->
+        <aside class="sidebar-right">
+            <h2 class="panel-title-light">MEMORY BUFFER</h2>
+            <div class="hex-dump" id="hex-dump">
+                <div class="hex-line">
+                    <span class="hex-addr">0000</span>
+                    <span class="hex-data">-- -- -- -- -- -- -- --</span>
+                    <span class="hex-ascii">........</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+
+</html>
